@@ -108,7 +108,7 @@ Plug 'asavostin23/vim-cyberpunk'
 call plug#end()
 
 " Use just installed theme
-" set termguicolors
+set termguicolors
 colorscheme cyberpunk
 let g:airline_theme='cyberpunk2077'
 
