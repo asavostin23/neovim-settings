@@ -24,8 +24,8 @@ set number
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
-" Highlight cursor line underneath the cursor vertically.
-set cursorcolumn
+" Don't Highlight cursor line underneath the cursor vertically.
+set nocursorcolumn
 
 " Set shift width to 4 spaces.
 set shiftwidth=4
@@ -92,6 +92,15 @@ if !has('gui_running')
     set mouse=
 endif
 
+" Vertical split to the right 
+set splitright
+
+" Split to the bottom
+set splitbelow
+
+" Change working dir automatically
+set autochdir
+
 " }}}
 
 " PLUGINS ---------------------------------------------------------------- {{{
@@ -102,18 +111,17 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
-Plug 'asavostin23/vim-cyberpunk'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'dense-analysis/ale'
+Plug 'ap/vim-buftabline'
+" Plug 'asavostin23/vim-cyberpunk'
 
 call plug#end()
-
-" Use just installed theme
-set termguicolors
-colorscheme cyberpunk
-let g:airline_theme='cyberpunk2077'
-
-" Change theme settings
-call HighlightFor("CursorLineNr",   "#140007", "#FF0055", "NONE")
 
 " }}}
 
@@ -145,11 +153,16 @@ nnoremap <c-l> <c-w>l
 " CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
 noremap <c-up> <c-w>+
 noremap <c-down> <c-w>-
-noremap <c-left> <c-w>>
-noremap <c-right> <c-w><
+noremap <c-left> <c-w><
+noremap <c-right> <c-w>>
 
 " Map the F3 key to toggle NERDTree open and close.
 nnoremap <silent> <F3> :NERDTreeToggle<cr>
+
+" Configure Buftabline
+" set hidden
+" nnoremap <C-N> :bnext<CR>
+" nnoremap <C-P> :bprev<CR>
 
 " }}}
 
@@ -192,6 +205,23 @@ augroup cursor_off
     autocmd WinLeave * set nocursorline nocursorcolumn
     autocmd WinEnter * set cursorline cursorcolumn
 augroup END
+
+" Use cyberpunk theme
+" set termguicolors
+" colorscheme cyberpunk
+" let g:airline_theme='cyberpunk2077'
+" call HighlightFor("CursorLineNr",   "#140007", "#FF0055", "NONE")
+
+" Configure OmniSharp
+let g:OmniSharp_server_use_mono = 0
+let g:OmniSharp_server_use_net6 = 1
+let g:OmniSharp_selector_ui = 'fzf'    " Use fzf
+let g:OmniSharp_selector_findusages = 'fzf'
+
+" Configure ALE
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
 
 " }}}
 
