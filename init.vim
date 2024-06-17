@@ -105,6 +105,13 @@ set autochdir
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
+" Autoinstall VimPlug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Plugin code goes here.
 call plug#begin()
 
@@ -120,9 +127,13 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'dense-analysis/ale'
 Plug 'ap/vim-buftabline'
 " Plug 'asavostin23/vim-cyberpunk'
+Plug 'dyng/ctrlsf.vim'
+
+Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
 
 call plug#end()
 
+colorscheme moonfly
 " }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
@@ -164,6 +175,12 @@ nnoremap <silent> <F3> :NERDTreeToggle<cr>
 " nnoremap <C-N> :bnext<CR>
 " nnoremap <C-P> :bprev<CR>
 
+" Exit terminal
+tnoremap <Esc> <C-\><C-n>
+
+" Simulate i_CTRL-R in terminal
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
@@ -174,13 +191,6 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
-
-" Autoinstall VimPlug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
