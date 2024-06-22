@@ -122,7 +122,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'OmniSharp/omnisharp-vim'
+" Plug 'OmniSharp/omnisharp-vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'dense-analysis/ale'
 Plug 'ap/vim-buftabline'
