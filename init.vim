@@ -122,12 +122,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Plug 'OmniSharp/omnisharp-vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'dense-analysis/ale'
 Plug 'ap/vim-buftabline'
 " Plug 'asavostin23/vim-cyberpunk'
 Plug 'dyng/ctrlsf.vim'
+Plug 'chr4/nginx.vim'
+Plug 'famiu/bufdelete.nvim'
 
 Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
 
@@ -180,6 +183,10 @@ tnoremap <Esc> <C-\><C-n>
 
 " Simulate i_CTRL-R in terminal
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+
+" FZF
+nmap <silent> <C-p> :FZF<CR>
 
 " }}}
 
